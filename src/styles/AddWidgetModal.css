@@ -1,0 +1,73 @@
+/* AddWidgetModal.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  width: 350px;
+  max-width: 90%;
+}
+
+.modal-title {
+  margin: 0 0 15px;
+  font-size: 1.25rem;
+  color: #333;
+}
+
+.widget-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+
+.widget-option {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.widget-option input {
+  margin-right: 10px;
+}
+
+.widget-title {
+  font-size: 1rem;
+  color: #555;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.confirm, .cancel {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.confirm {
+  background-color: #4CAF50;
+  color: #fff;
+}
+
+.cancel {
+  background-color: #f44336;
+  color: #fff;
+}

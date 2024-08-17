@@ -1,0 +1,73 @@
+.image-risk-assessment {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .chart-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .total-vulnerabilities {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 10px; /* Added spacing for labels */
+  }
+  
+  .vulnerability-count {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .vulnerability-text {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .stacked-bar {
+    display: flex;
+    height: 10px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #e0e0e0;
+    position: relative;
+  }
+  
+  .stacked-bar-segment {
+    height: 100%;
+    position: relative;
+    transition: width 0.5s ease;
+  }
+  
+  .labels {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .label-item {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  
+  .color-box {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 3px;
+  }
+  
+  .label-text {
+    color: #333; /* Default color, text will match color of the risk */
+  }

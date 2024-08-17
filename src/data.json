@@ -1,0 +1,111 @@
+{
+  "categories": [
+    {
+      "id": 1,
+      "title": "CSPM Executive Dashboard",
+      "widgets": [
+        {
+          "id": 1,
+          "title": "Cloud Accounts",
+          "type": "doughnut",
+          "data": {
+            "labels": ["Connected", "Not Connected"],
+            "datasets": [
+              {
+                "data": [2, 2],
+                "backgroundColor": ["#36A2EB", "#A2D9FF"]
+              }
+            ]
+          }
+        },
+        {
+          "id": 2,
+          "title": "Cloud Account Risk Assessment",
+          "type": "doughnut",
+          "data": {
+            "labels": ["Failed", "Warning", "Not available", "Passed"],
+            "datasets": [
+              {
+                "data": [1689, 681, 36, 7253],
+                "backgroundColor": ["#FF6384", "#FFCE56", "#FF9F40", "#4BC0C0"]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "CWPP Dashboard",
+      "widgets": [
+        {
+          "id": 3,
+          "title": "Top 5 Namespace Specific Alerts",
+          "type": "bar",
+          "data": {
+            "labels": ["Namespace 1", "Namespace 2", "Namespace 3", "Namespace 4", "Namespace 5"],
+            "datasets": [
+              {
+                "label": "Alerts",
+                "data": [12, 19, 3, 5, 2],
+                "backgroundColor": "#36A2EB"
+              }
+            ]
+          }
+        },
+        {
+          "id": 4,
+          "title": "Workload Alerts",
+          "type": "line",
+          "data": {
+            "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+            "datasets": [
+              {
+                "label": "Alerts",
+                "data": [65, 59, 80, 81, 56, 55, 40],
+                "fill": false,
+                "borderColor": "#FF6384"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Registry Scan",
+      "widgets": [
+        {
+          "id": 5,
+          "title": "Image Risk Assessment",
+          "type": "bar",
+          "data": {
+            "labels": ["Critical", "High", "Medium", "Low"],
+            "datasets": [
+              {
+                "label": "Vulnerabilities",
+                "data": [9, 150, 200, 500],
+                "backgroundColor": ["#FF6384", "#FFCE56", "#36A2EB", "#4BC0C0"]
+              }
+            ]
+          }
+        },
+        {
+          "id": 6,
+          "title": "Image Security Issues",
+          "type": "bar",
+          "data": {
+            "labels": ["Critical", "High", "Medium", "Low"],
+            "datasets": [
+              {
+                "label": "Issues",
+                "data": [2, 2, 4, 6],
+                "backgroundColor": ["#FF6384", "#FFCE56", "#36A2EB", "#4BC0C0"]
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

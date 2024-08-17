@@ -1,0 +1,177 @@
+/* General styles */
+.dashboard-header {
+  padding: 20px;
+  background-color: #f8f9fc;
+  border: none;
+}
+
+.breadcrumb {
+  font-size: 14px;
+  color: #8b8f9a;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  padding-left: 20px;
+}
+
+.current-page {
+  font-weight: bold;
+  color: #000;
+}
+
+.dashboard-title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  background-color: #f8f9fc;
+  width: 100%;
+}
+
+.dashboard-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #2a2e3b;
+}
+
+.action-buttons {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar {
+  position: relative;
+  width: 100%; /* Make it responsive */
+  max-width: 250px; /* Ensure it doesn't get too wide */
+  margin-right: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 12px;
+  padding-left: 32px; /* Add space for the icon */
+  border: 1px solid #e5e7eb;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #6b7280;
+  outline: none;
+  background-color: #F0F5F9;
+}
+
+.search-bar .icon-search {
+  position: absolute;
+  left: 10px; /* Position the icon inside the input */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: #6b7280;
+  pointer-events: none;
+}
+
+.add-widget-btn {
+  background-color: white;
+  color: #9299A3;
+  border: none;
+  border: 1px solid #E9EDF2;
+  padding: 8px 16px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Adds space between text and icon */
+}
+
+.extra-options-btn {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-right: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.date-range-btn {
+  background-color: #ffffff;
+  border: 1px solid #4338ca;
+  color: #4338ca;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px; /* Adds space between icons and text */
+}
+
+.date-range-btn .icon-calendar {
+  font-size: 16px;
+  color: #4338ca;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+
+  .dashboard-header {
+    padding: 15px;
+  }
+
+  .breadcrumb {
+    font-size: 12px;
+    padding: 8px;
+  }
+  
+
+  .dashboard-title {
+    font-size: 20px;
+    
+  }
+
+  .dashboard-header .dashboard-title-section .dashboard-title{
+    font-size: 11px;
+  }
+
+  .search-bar {
+    width: 100%; /* Full width on smaller screens */
+    margin-right: 0; /* Remove margin on small screens */
+  }
+
+  .add-widget-btn, .extra-options-btn, .date-range-btn {
+    padding: 6px 12px;
+    font-size: 5px;
+    margin-right: 4px;
+  }
+
+  .dashboard-header .dashboard-title-section .action-buttons{
+    font-size: 5px;
+    margin-bottom: 15px;
+
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-title {
+    font-size: 18px;
+  }
+
+  .breadcrumb {
+    font-size: 10px;
+    padding: 6px;
+  }
+
+  .search-bar input {
+    font-size: 12px;
+  }
+
+  .add-widget-btn, .extra-options-btn, .date-range-btn {
+    padding: 4px 8px;
+    font-size: 10px;
+    margin-right: 2px;
+  }
+}
