@@ -1,8 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/AddWidgetModal2.css';
 
-const AddWidgetModal2 = ({ selectedWidgets, onSave, onClose }) => {
+const AddWidgetModal2 = ({ isOpen, onClose, onSave, selectedWidgets }) => {
   const [activeTab, setActiveTab] = useState(Object.keys(selectedWidgets)[0]);
+  const [searchTerm, setSearchTerm] = useState(''); // State for search term
+
+  useEffect(() => {
+    if (isOpen) {
+      setActiveTab(Object.keys(selectedWidgets)[0]);
+      setSearchTerm(''); // Reset search term when modal opens
+    }
+  }, [isOpen]);
 
   const handleCheckboxChange = (category, widgetTitle) => {
     onSave({
@@ -14,35 +22,53 @@ const AddWidgetModal2 = ({ selectedWidgets, onSave, onClose }) => {
     });
   };
 
+  const handleSearch = (e) => {
+    setSearchTerm(e.target.value); // Update search term state
+  };
+
+  const filterWidgets = (widgetTitle) => {
+    return widgetTitle.toLowerCase().includes(searchTerm.toLowerCase()); // Filter widgets based on search term
+  };
+
   const renderTabContent = (category) => {
     return (
       <div className="category-section">
-        {Object.keys(selectedWidgets[category]).map((widgetTitle) => (
-          <div key={widgetTitle} className="widget-checkbox">
-            <input
-              type="checkbox"
-              id={`${category}-${widgetTitle}`}
-              checked={selectedWidgets[category][widgetTitle]}
-              onChange={() => handleCheckboxChange(category, widgetTitle)}
-            />
-            <label htmlFor={`${category}-${widgetTitle}`}>{widgetTitle}</label>
-          </div>
-        ))}
+        {Object.keys(selectedWidgets[category])
+          .filter(filterWidgets) // Apply search filter
+          .map((widgetTitle) => (
+            <div key={widgetTitle} className="widget-checkbox">
+              <input
+                type="checkbox"
+                id={`${category}-${widgetTitle}`}
+                checked={selectedWidgets[category][widgetTitle]}
+                onChange={() => handleCheckboxChange(category, widgetTitle)}
+              />
+              <label htmlFor={`${category}-${widgetTitle}`}>{widgetTitle}</label>
+            </div>
+          ))}
       </div>
     );
   };
 
+  if (!isOpen) return null;
+
   return (
-    <>
-    
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h2>Add Widget</h2>
+          <input
+            type="text"
+            placeholder="e.g - Risk"
+            value={searchTerm}
+            onChange={handleSearch}
+            className="search-input"
+          />
           <button className="close-btn" onClick={onClose}>×</button>
         </div>
         <div className="modal-body">
-          <p>Personalise your dashboard by adding the following widget</p>
+          
+          <p>Personalize your dashboard by adding or removing the following widgets</p>
           <div className="tab-container">
             {Object.keys(selectedWidgets).map((category) => (
               <button
@@ -62,9 +88,6 @@ const AddWidgetModal2 = ({ selectedWidgets, onSave, onClose }) => {
         </div>
       </div>
     </div>
-    
-    </>
-    
   );
 };
 
