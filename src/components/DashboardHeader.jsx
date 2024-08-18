@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../styles/DashboardHeader.css';
 import { FaPlus } from 'react-icons/fa';
 import { TfiReload } from 'react-icons/tfi';
@@ -8,25 +8,16 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { CiSearch } from 'react-icons/ci';
 import AddWidgetModal2 from '../components/AddWidgetModal2.jsx';
 
-const DashboardHeader = ({ onUpdateSelectedWidgets }) => {
+const DashboardHeader = ({ initialSelectedWidgets, onUpdateSelectedWidgets }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Track selected widgets for the modal
-  const [selectedWidgets, setSelectedWidgets] = useState({
-    'CSPM Executive Dashboard': {
-      'Cloud Accounts': true,  // Initially set to true
-      'Cloud Account Risk Assessment': true, // Initially set to true
-    },
-    'CWPP Dashboard': {
-      'Top 5 Namespace Specific Alerts': true,  // Initially set to true
-      'Workload Alerts': true,  // Initially set to true
-    },
-    'Registry Scan': {
-      'Image Vulnerabilities': true,  // Initially set to true
-      'Compliance Issues': true,  // Initially set to true
-    },
-  });
+  // Track selected widgets for the modal, using initial widgets passed from the dashboard
+  const [selectedWidgets, setSelectedWidgets] = useState(initialSelectedWidgets);
+
+  useEffect(() => {
+    setSelectedWidgets(initialSelectedWidgets); // Sync initial widgets with Dashboard
+  }, [initialSelectedWidgets]);
 
   // Handle search term change
   const handleSearchChange = (event) => {
@@ -42,7 +33,7 @@ const DashboardHeader = ({ onUpdateSelectedWidgets }) => {
     setIsModalOpen(false);
   };
 
-  // Handle save widgets
+  // Handle save widgets, update both the header and dashboard widgets
   const handleSaveWidgets = (updatedWidgets) => {
     setSelectedWidgets(updatedWidgets);
     onUpdateSelectedWidgets(updatedWidgets); // Pass updated widgets to Dashboard
@@ -52,7 +43,9 @@ const DashboardHeader = ({ onUpdateSelectedWidgets }) => {
   return (
     <>
       <div className="breadcrumb">
-        <span>Home &gt; <span className="current-page">Dashboard V2</span></span>
+        <span>
+          Home &gt; <span className="current-page">Dashboard V2</span>
+        </span>
         <div className="search-bar">
           <CiSearch className="icon-search" />
           <input

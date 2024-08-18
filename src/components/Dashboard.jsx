@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Widget from '../components/Widget.jsx';
 import ImageRiskAssessment from '../components/ImageRiskAssessment.jsx';
 import ImageSecurityIssues from './ImageSecurityIssues.jsx';
 import AddWidgetModal from '../components/AddWidgetModal.jsx';
-
+import DashboardHeader from '../components/DashboardHeader.jsx';
 import '../styles/Dashboard.css';
 import { FaPlus } from 'react-icons/fa';
 
 const Dashboard = () => {
+  const initialSelectedWidgets = {
+    'CSPM Executive Dashboard': {
+      'Cloud Accounts': true,
+      'Cloud Account Risk Assessment': true,
+    },
+    'CWPP Dashboard': {
+      'Top 5 Namespace Specific Alerts': true,
+      'Workload Alerts': true,
+    },
+    'Registry Scan': {
+      'Image Risk Assessment': true,
+      'Image Security Issues': true,
+    },
+  };
+
   const [categories, setCategories] = useState([
     {
       id: 1,
@@ -47,48 +62,55 @@ const Dashboard = () => {
     },
   ]);
 
-
-
-  const [selectedCategory, setSelectedCategory] = useState(null);
-  const [selectedWidgets, setSelectedWidgets] = useState({});
+  const [selectedWidgets, setSelectedWidgets] = useState(initialSelectedWidgets);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
 
+  // Sync selectedWidgets with the initial state when Dashboard is loaded
+  useEffect(() => {
+    syncCategoriesWithWidgets();
+  }, [selectedWidgets]);
 
+  const syncCategoriesWithWidgets = () => {
+    const updatedCategories = categories.map((category) => {
+      const widgetsInCategory = Object.entries(selectedWidgets[category.title])
+        .filter(([widgetTitle, isSelected]) => isSelected)
+        .map(([widgetTitle]) => category.availableWidgets.find((widget) => widget.title === widgetTitle));
+      return { ...category, widgets: widgetsInCategory };
+    });
+    setCategories(updatedCategories);
+  };
 
   const openAddWidgetModal = (category) => {
     setSelectedCategory(category);
-    setSelectedWidgets(
-      category.availableWidgets.reduce((acc, widget) => {
-        acc[widget.title] = category.widgets.some((w) => w.title === widget.title);
-        return acc;
-      }, {})
-    );
     setIsModalOpen(true);
   };
 
   const toggleWidget = (widgetTitle) => {
     setSelectedWidgets((prevSelectedWidgets) => ({
       ...prevSelectedWidgets,
-      [widgetTitle]: !prevSelectedWidgets[widgetTitle],
+      [selectedCategory.title]: {
+        ...prevSelectedWidgets[selectedCategory.title],
+        [widgetTitle]: !prevSelectedWidgets[selectedCategory.title][widgetTitle],
+      },
     }));
   };
 
   const confirmWidgets = () => {
-    const updatedCategories = categories.map((category) => {
-      if (category.id === selectedCategory.id) {
-        const newWidgets = category.availableWidgets.filter(
-          (widget) => selectedWidgets[widget.title]
-        );
-        return { ...category, widgets: newWidgets };
-      }
-      return category;
-    });
-    setCategories(updatedCategories);
+    syncCategoriesWithWidgets();
     setIsModalOpen(false);
+  };
+
+  const handleUpdateSelectedWidgets = (updatedWidgets) => {
+    setSelectedWidgets(updatedWidgets);
   };
 
   return (
     <div className="dashboard">
+      <DashboardHeader
+        initialSelectedWidgets={selectedWidgets}
+        onUpdateSelectedWidgets={handleUpdateSelectedWidgets}
+      />
       {categories.map((category) => (
         <div key={category.id} className="dashboard-category">
           <h2>{category.title}</h2>
@@ -102,17 +124,15 @@ const Dashboard = () => {
                 ) : (
                   <Widget title={widget.title} type={widget.type} />
                 )}
-                
               </div>
             ))}
             <button
               className="addWidget"
               onClick={() => openAddWidgetModal(category)}
             >
-              <div className='addWidgetDiv'>
-              <span><FaPlus /></span><b>Add Widget</b>
+              <div className="addWidgetDiv">
+                <span><FaPlus /></span><b>Add Widget</b>
               </div>
-              
             </button>
           </div>
         </div>
@@ -120,7 +140,7 @@ const Dashboard = () => {
       {isModalOpen && (
         <AddWidgetModal
           widgets={selectedCategory.availableWidgets}
-          selectedWidgets={selectedWidgets}
+          selectedWidgets={selectedWidgets[selectedCategory.title]}
           toggleWidget={toggleWidget}
           confirmWidgets={confirmWidgets}
           closeModal={() => setIsModalOpen(false)}
