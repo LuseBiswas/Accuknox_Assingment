@@ -106,11 +106,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="dashboard">
-      <DashboardHeader
+    <>
+     <DashboardHeader
         initialSelectedWidgets={selectedWidgets}
         onUpdateSelectedWidgets={handleUpdateSelectedWidgets}
       />
+    <div className="dashboard">
+     
       {categories.map((category) => (
         <div key={category.id} className="dashboard-category">
           <h2>{category.title}</h2>
@@ -147,6 +149,8 @@ const Dashboard = () => {
         />
       )}
     </div>
+    </>
+    
   );
 };
 
