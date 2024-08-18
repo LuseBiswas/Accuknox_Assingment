@@ -1,8 +1,27 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# ReachInBox_Assingment
 
-Currently, two official plugins are available:
+To run the website
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Download the Code
+- Open the VS code
+- npm install in root folder
+- npm run dev
+
+
+
+
+
+
+## Demo
+
+🌐 https://accuknox-assingment.vercel.app/
+
+
+## Features
+
+- Created a Json to build this dashboard / widget dynamically. Json will contain categories and each category will contain multiple widgets.
+- Users will be able to dynamically add a widget and remove a widget from a section/ category. eg : CSPM Executive dashboard is a category.
+- On each widget, we can have a cross icon to remove it from a category or users can go to add category section and uncheck from category list
+- Users should be able to search in a list of all the widgets.
+
